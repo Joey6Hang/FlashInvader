@@ -5,17 +5,19 @@ import Navi from "./component/nav"
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Create from "./views/InvaderCreat";
 import Home from "./views/Home"
+import Signin from './views/Signin';
+import Signup from './views/Signup';
 
 function App() {
   return (
     <div className="App">
-      <Navi></Navi>
+      <Navi />
        <main id="content_main">
        <BrowserRouter>
          <Switch>
-         <Route exact path="/" component={Home} />
-          {/* <Route path="/signin" component={Signin} />
-          <Route path="/signup" component={Signup} /> */}
+          <Route exact path="/" component={Home} />
+          <Route path="/signin" component={Signin} />
+          <Route path="/signup" component={Signup} /> 
           <Route path="/create" component={Create} />
 
          </Switch>

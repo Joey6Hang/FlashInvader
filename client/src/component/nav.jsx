@@ -1,26 +1,31 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link , Router} from "react-router-dom";
 // import IconAvatarAdmin from "../components/icon/IconAvatarAdmin";
-import create from "../views/InvaderCreat"
+// import { useAuth } from "../auth/useAuth";
 
-class Navi extends Component {
-    render(){
+
+export default function Navi() {    
+      // const { isLoggedIn } = useAuth();
+
         return(
           <div>
           <ul class="nav justify-content-end">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/create">create</a>
           </li>
+        
+            <>
           <li class="nav-item">
-            <a class="nav-link" href="/login">login</a>
+            <a class="nav-link" href="/signin">Signin</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/signup">signup</a>
+            <a class="nav-link" href="/signup">Signup</a>
           </li>
+          </>
+          
         </ul>
         </div>
         )
     }
-}
 
-export default Navi

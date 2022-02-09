@@ -1,12 +1,17 @@
 require("./configs/mongo");
-
+require("dotenv").config();
+require("./configs/passport");
 // const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
+const session = require("express-session"); //sessions make data persist between http calls
+const _DEVMODE = false;
 
+
+const authRouter = require("./routes/auth")
 const invadersRouter = require("./routes/invader");
 const app = express();
 
@@ -25,14 +30,39 @@ app.use(
   })
 );
 
+app.use(
+  session({
+    cookie: { secure: false, maxAge: 4 * 60 * 60 * 1000 }, // 4 hours
+    resave: true,
+    saveUninitialized: true,
+    secret: process.env.SECRET_SESSION
+  })
+);
+
 app.get("/", (req, res) => res.send("server is running"));
 
 app.use("/api/invaders", invadersRouter);
+app.use("/api/auth", authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
 });
+
+if (_DEVMODE === true) {
+  app.use(function devMode(req, res, next) {
+    req.user = {
+      _id: "5de9c376fa023e21a766a606",
+      username: "guillaume",
+      email: "gui@foo.bar",
+      avatar:
+        "https://res.cloudinary.com/gdaconcept/image/upload/v1575298339/user-pictures/jadlcjjnspfhknucjfkd.png",
+      role: "admin",
+    };
+
+    next();
+  });
+}
 
 // error handler
 app.use(function (err, req, res, next) {

@@ -7,7 +7,7 @@ export default class Home extends Component {
   };
 
   fetchInvaders = async () => {
-    APIHandler.get("/api/invaders")
+    APIHandler.get("/invaders")
       .then(({ data }) => {
         this.setState({
             invaders: data,
@@ -20,7 +20,7 @@ export default class Home extends Component {
 
   handleDelete = async (id) => {
     try {
-      await APIHandler.delete(`/api/invaders/${id}`);
+      await APIHandler.delete(`/invaders/${id}`);
       this.fetchInvaders();
     } catch (err) {
       console.error(err);

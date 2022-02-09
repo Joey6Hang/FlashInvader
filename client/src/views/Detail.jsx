@@ -11,7 +11,7 @@ export default class Details extends Component {
 
       fetchInvader = async () => {
         try {
-          const res = await APIHandler.get("/api/invaders/" + this.props.id);
+          const res = await APIHandler.get("/invaders/" + this.props.id);
           this.setState({
             invaders: res.data,
           });
