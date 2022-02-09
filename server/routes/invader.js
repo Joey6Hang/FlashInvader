@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const InvaderModel = require("../module/invader");
-
-// https://fr.wikipedia.org/wiki/Liste_des_codes_HTTP
-// https://docs.microsoft.com/fr-fr/azure/architecture/best-practices/api-design
+const InvaderModel = require("./../models/invader");
 
 // CREATE
 router.post("/", async (req, res, next) => {

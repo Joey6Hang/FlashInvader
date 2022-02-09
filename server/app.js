@@ -8,7 +8,6 @@ const logger = require("morgan");
 const cors = require("cors");
 
 const invadersRouter = require("./routes/invader");
-const createRouter = require("./routes/Create")
 const app = express();
 
 // view engine setup
@@ -29,7 +28,6 @@ app.use(
 app.get("/", (req, res) => res.send("server is running"));
 
 app.use("/api/invaders", invadersRouter);
-app.use("/api/create", createRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

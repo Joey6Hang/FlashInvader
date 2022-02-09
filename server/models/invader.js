@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 // plan the document shapes
 const invaderSchema = new Schema({
-  id:String,
+  idName:String,
   address:String,
   photo: String,
   point: Number,
-  Supplementary:String,
+  supplementary:String,
   arrondissement:Number
 });
 
