@@ -19,18 +19,18 @@ export default class Home extends Component {
         });
       })
       .catch((err) => {
-        console.error(err);
+        console.error(err.response.data);
       });
   };
 
-  handleDelete = async (id) => {
-    try {
-      await APIHandler.delete(`/invaders/${id}`);
-      this.fetchInvaders();
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  // handleDelete = async (id) => {
+  //   try {
+  //     await APIHandler.delete(`/invaders/${id}`);
+  //     this.fetchInvaders();
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   componentDidMount() {
     this.fetchInvaders();
@@ -59,10 +59,10 @@ export default class Home extends Component {
                   <Link to={{pathname:`/invader/${invader._id}`,
                   invaderId: invader._id}}>
                   <img
-                    srv={invader.photo}
+                    src={invader.photo}
                     alt="invader"
                     width="180px"
-                    height="270px"
+                    height="180px"
                   />  
                   </Link>
                 </div>

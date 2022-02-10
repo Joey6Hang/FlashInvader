@@ -7,6 +7,7 @@ import Create from "./views/InvaderCreat";
 import Home from "./views/Home"
 import Signin from './views/Signin';
 import Signup from './views/Signup';
+import Details from './views/Detail';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} /> 
           <Route path="/create" component={Create} />
-
+          <Route path="/invader/:id" component={Details} />
          </Switch>
          </BrowserRouter>
        </main>

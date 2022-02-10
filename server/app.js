@@ -5,6 +5,7 @@ require("./configs/passport");
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const passport = require("passport");
 const logger = require("morgan");
 const cors = require("cors");
 const session = require("express-session"); //sessions make data persist between http calls
@@ -22,10 +23,12 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public/build")));
+
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: [process.env.CLIENT_URL],
     credentials: true, // usefull when dealing with authentication
     optionsSuccessStatus: 200,
   })
@@ -38,13 +41,14 @@ app.use(
     saveUninitialized: true,
     secret: process.env.SECRET_SESSION
   })
-);
+  );
+   app.use(passport.initialize())
 
-app.get("/", (req, res) => res.send("server is running"));
+   app.get("/", (req, res) => res.send("server is running"));
 
-app.use("/api/invaders", invadersRouter);
-app.use("/api/auth", authRouter);
-app.use("api/users", usersRouter)
+app.use("/api", invadersRouter);
+app.use("/api", authRouter);
+app.use("/api", usersRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -3,7 +3,7 @@ const router = express.Router();
 const InvaderModel = require("./../models/invader");
 
 // CREATE
-router.post("/", async (req, res, next) => {
+router.post("/invaders", async (req, res, next) => {
   try {
     const newInvader = await InvaderModel.create(req.body);
     res.status(201).json(newInvader);
@@ -14,7 +14,7 @@ router.post("/", async (req, res, next) => {
 
 // READ
 
-router.get("/", async (req, res, next) => {
+router.get("/invaders", async (req, res, next) => {
   try {
     const invaders = await InvaderModel.find();
     res.status(200).json(invaders);
@@ -23,7 +23,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get("/invader/:id", async (req, res, next) => {
   try {
     const invader = await InvaderModel.findById(req.params.id);
     res.status(200).json(invader);
@@ -33,7 +33,7 @@ router.get("/:id", async (req, res, next) => {
 });
 
 // UPDATE
-router.patch("/:id", async (req, res, next) => {
+router.patch("/invader/:id", async (req, res, next) => {
   try {
     const updatedInvader = await InvaderModel.findByIdAndUpdate(
       req.params.id,
@@ -47,7 +47,7 @@ router.patch("/:id", async (req, res, next) => {
 });
 
 // DELETE
-router.delete("/:id", async (req, res, next) => {
+router.delete("/invader/:id", async (req, res, next) => {
   try {
     const deletedInvader = await InvaderModel.findByIdAndDelete(req.params.id);
     res.status(200).json(deletedInvader);

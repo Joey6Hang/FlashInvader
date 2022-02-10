@@ -17,11 +17,20 @@ export default class Create extends Component {
  
   handleSubmit = async (e) => {
     e.preventDefault();
+    const fd = new FormData();
+    // create a form data (programatic form, to send the file as binary)
+    fd.append("idName", this.state.idName);
+    fd.append("address", this.state.address);
+    fd.append("supplementary", this.state.supplementary);
+    fd.append("point", this.state.point);
+    fd.append("arrondissement", this.state.arrondissement);
+    fd.append("photo", this.state.photo);
+    
     try {
      const res = await APIHandler.post("/invaders", this.state);
       console.log(res.data);
     } catch (err) {
-      console.error(err);
+      console.error(err.response.data);
     }
   };
 
@@ -34,16 +43,19 @@ export default class Create extends Component {
 
     handleImage = e => {
       this.setState({ photo: e.target.files[0] }, () => {
-        console.log(e.target.files[0]);
         const reader = new FileReader();
+        console.log(e.target);
+      
         reader.onloadend = () => {
           const baseString = reader.result;
           console.log(baseString)
+          this.setState({ photo : baseString })
         }
+      
         reader.readAsDataURL(this.state.photo);
-    });
-  }
 
+    });
+    }
   render() {
       return (
         <form className="main">
@@ -104,7 +116,8 @@ export default class Create extends Component {
 
                     <label class="nes-btn">
                         <span>Select your file</span>
-                        <input type="file" src={this.state.photo} onChange={this.handleImage} name="photo" ></input>
+                        <input type="file" accept="image/*" onChange={this.handleImage} name="photo" ></input>
+                        {/* <img id="blah" src={URL.createObjectURL(this.setState.photo)} alt="img" /> */}
                       </label>
 
                       <button type="button" class="nes-btn is-success" onClick={this.handleSubmit}>OK</button>

@@ -3,47 +3,64 @@ import APIHandler from "./../api/APIHandler";
 
 export default class Details extends Component {
     state = {
-        invader:null,
+      idName:"",
+      address:"",
+      supplementary:"",
+      point: 0,
+      arrondissement:0,
+      photo: null,
+      
     }
-    componentDidMount() {
-        this.fetchInvader();
-      }
+    async componentDidMount() {
+      APIHandler.get(`/invader/${this.props.match.params.id}`)
+      .then(({ data }) => {
+        this.setState(
+          {
+            idName: data.idName,
+            address: data.address,
+            supplementary: data.supplementarys,
+            point: data.point,
+            arrondissement: data.arrondissement,
+            photo: data.photo,
+          },
+        );
+      })
+      .catch((error) => console.error(error.response.data));      
+    }
 
-      fetchInvader = async () => {
-        try {
-          const res = await APIHandler.get("/invaders/" + this.props.id);
-          this.setState({
-            invaders: res.data,
-          });
-        } catch (err) {
-          console.error(err);
-        }
-      };
+      // fetchInvader = async () => {
+      //   try {
+      //     const res = await APIHandler.get(`/api/invaders/ + ${this.props.match.params.id}`);
+      //     console.log(this.props.match);
+      //     this.setState({
+      //       invader: res.data,
+      //     });
+      //   } catch (err) {
+      //     console.error(err);
+      //   }
+      // };
 
       render() {
-        const { invader } = this.state;
         return (
           <div>
-            {!invader ? (
-              <p>loading...</p>
-            ) : (
+            
               <>
                 <h1>invader's details</h1>
                 <p>
-                  id: {invader.id}
+                  id: {this.state.idName}
                   <br />
-                  address: {invader.address}
+                  address: {this.state.address}
                   <br />
-                  point: {invader.point}
+                  photo:<img src={this.state.photo} alt={this.state.idName} className="imgdetail" />
                   <br />
-                  photo: {invader.photo}
+                  point: {this.state.point}
                   <br />
-                  arrondissement: {invader.arrondissement}
+                  arrondissement: {this.state.arrondissement}
                   <br />
-                  Supplementary: {invader.Supplementary}
+                  Supplementary: {this.state.supplementary}
                 </p>
               </>
-            )}
+            
           </div>
         );
       }
