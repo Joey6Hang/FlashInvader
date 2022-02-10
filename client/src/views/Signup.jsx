@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import APIHandler from "../api/APIHandler";
 import IconAvatarAdmin from "../component/icon/IconAvatarAdmin";
 // styles 
-// import "./../styles/form.css";
-// import "./../styles/icon-avatar.css";
+import "./../styles/form.css";
+import "./../styles/icon-avatar.css";
 
 export default class Signup extends Component {
   state = {

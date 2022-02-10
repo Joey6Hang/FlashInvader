@@ -11,8 +11,9 @@ const session = require("express-session"); //sessions make data persist between
 const _DEVMODE = false;
 
 
-const authRouter = require("./routes/auth")
-const invadersRouter = require("./routes/invader");
+const authRouter = require("./routes/auth.js")
+const invadersRouter = require("./routes/invader.js");
+const usersRouter = require("./routes/users.js")
 const app = express();
 
 // view engine setup
@@ -43,6 +44,7 @@ app.get("/", (req, res) => res.send("server is running"));
 
 app.use("/api/invaders", invadersRouter);
 app.use("/api/auth", authRouter);
+app.use("api/users", usersRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

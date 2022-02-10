@@ -1,5 +1,10 @@
 import React, { Component } from "react";
 import APIHandler from "../api/APIHandler";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container, Tabs, Tab,Row, Col, Spinner } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
+
 
 export default class Home extends Component {
   state = {
@@ -35,26 +40,37 @@ export default class Home extends Component {
     const { invaders } = this.state;
     return (
       <div className="invader-list-wrap">
-        <h1>all invaders</h1>
-        <ul className="list">
-          {invaders.map((invader, i) => (
-            <li className="item" key={i}>
-              <span>{invader.name}</span>
-              <div className="buttons">
-                <button onClick={() => this.props.handler(invader._id, "details")}>
-                  details
-                </button>
-                <button onClick={() => this.props.handler(invader._id, "update")}>
-                  update
-                </button>
-                <button onClick={() => this.handleDelete(invader._id)}>
-                  delete
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <img src="/images/application-flash-invaders.jpeg" alt="img" width="100%" height= "280"></img>
+        <h1>Invaders</h1>
+        {!this.state.invaders.length? (
+          <div className="jiazai">
+          Waiting  
+            <Spinner animation="grow" variant="dark" size="sm"/>
+            <Spinner animation="grow" variant="dark" size="sm"/>
+            <Spinner animation="grow" variant="dark" size="sm"/>
+            <Spinner animation="grow" variant="dark" size="sm"/>
+            <Spinner animation="grow" variant="dark" size="sm"/>
+          </div>
+        ) :(
+          <div class='container'>
+          <div class="row">
+              {[...invaders].map((invader, i) => (
+                <div class="col" key={i} >
+                  <Link to={{pathname:`/invader/${invader._id}`,
+                  invaderId: invader._id}}>
+                  <img
+                    srv={invader.photo}
+                    alt="invader"
+                    width="180px"
+                    height="270px"
+                  />  
+                  </Link>
+                </div>
+              ))}
+          </div>
+          </div>
+    )}
       </div>
-    );
+      );
+    }
   }
-}

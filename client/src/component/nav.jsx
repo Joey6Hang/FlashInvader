@@ -12,6 +12,11 @@ export default function Navi() {
           <div>
           <ul class="nav justify-content-end">
           <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">
+              <img src="/images/logo1.png" alt="logo" width='40' height='40' ></img>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/create">create</a>
           </li>
         
