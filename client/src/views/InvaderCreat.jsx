@@ -34,6 +34,7 @@ export default class Create extends Component {
 
     handleImage = e => {
       this.setState({ photo: e.target.files[0] }, () => {
+        console.log(e.target.files[0]);
         const reader = new FileReader();
         reader.onloadend = () => {
           const baseString = reader.result;
@@ -103,7 +104,7 @@ export default class Create extends Component {
 
                     <label class="nes-btn">
                         <span>Select your file</span>
-                        <input type="file" onChange={this.handleImage} name="photo" ></input>
+                        <input type="file" src={this.state.photo} onChange={this.handleImage} name="photo" ></input>
                       </label>
 
                       <button type="button" class="nes-btn is-success" onClick={this.handleSubmit}>OK</button>
