@@ -3,7 +3,7 @@ import APIHandler from "../api/APIHandler";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Tabs, Tab,Row, Col, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import "./../styles/home.css"
 
 
 export default class Home extends Component {
@@ -55,7 +55,7 @@ export default class Home extends Component {
           <div class='container'>
           <div class="row">
               {[...invaders].map((invader, i) => (
-                <div class="col" key={i} >
+                <div class="col" key={i} id="home">
                   <Link to={{pathname:`/invader/${invader._id}`,
                   invaderId: invader._id}}>
                   <img

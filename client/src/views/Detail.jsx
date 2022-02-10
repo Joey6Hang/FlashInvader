@@ -1,5 +1,7 @@
 import React,{Component} from "react";
 import APIHandler from "./../api/APIHandler";
+import { Link, Redirect } from "react-router-dom";
+
 
 export default class Details extends Component {
     state = {
@@ -27,18 +29,20 @@ export default class Details extends Component {
       })
       .catch((error) => console.error(error.response.data));      
     }
+      handleUpdate = async (e) => {
+        
+      }
 
-      // fetchInvader = async () => {
-      //   try {
-      //     const res = await APIHandler.get(`/api/invaders/ + ${this.props.match.params.id}`);
-      //     console.log(this.props.match);
-      //     this.setState({
-      //       invader: res.data,
-      //     });
-      //   } catch (err) {
-      //     console.error(err);
-      //   }
-      // };
+      handleDelete = async (e) => {
+        try {
+          await APIHandler.delete(`/invader/${this.props.match.params.id}`);
+         // this.fetchInvader();
+         alert("Delete");
+         this.props.history.push("/")
+        } catch (err) {
+          console.error(err);
+        }
+      };
 
       render() {
         return (
@@ -46,6 +50,9 @@ export default class Details extends Component {
             
               <>
                 <h1>invader's details</h1>
+                {/* <button onClick={() => this.props.handler(this.state._id, "update")} >Update</button> */}
+                <button onClick={() => this.handleDelete(this.state._id)} >Delete</button>
+                
                 <p>
                   id: {this.state.idName}
                   <br />

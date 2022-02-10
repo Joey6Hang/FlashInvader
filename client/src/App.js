@@ -8,6 +8,7 @@ import Home from "./views/Home"
 import Signin from './views/Signin';
 import Signup from './views/Signup';
 import Details from './views/Detail';
+import Update from './views/InvaderUpdate';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/signup" component={Signup} /> 
           <Route path="/create" component={Create} />
           <Route path="/invader/:id" component={Details} />
+          <Route path="/update/:id" component={Update} />
          </Switch>
          </BrowserRouter>
        </main>
