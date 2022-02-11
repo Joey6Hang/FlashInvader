@@ -28,6 +28,8 @@ export default class Create extends Component {
     
     try {
      const res = await APIHandler.post("/invaders", this.state);
+     alert("Yeahhh!")
+     this.props.history.push("/")
       console.log(res.data);
     } catch (err) {
       console.error(err.response.data);
@@ -115,12 +117,12 @@ export default class Create extends Component {
                      onChange={this.handleChange} value={this.state.supplementary}></textarea>
 
                     <label class="nes-btn">
-                        <span>Select your file</span>
+                    <span>your file</span>
                         <input type="file" accept="image/*" onChange={this.handleImage} name="photo" ></input>
                         {/* <img id="blah" src={URL.createObjectURL(this.setState.photo)} alt="img" /> */}
                       </label>
 
-                      <button type="button" class="nes-btn is-success" onClick={this.handleSubmit}>OK</button>
+                      <button type="button" id="submit" class="nes-btn is-success" onClick={this.handleSubmit}><i class="nes-pokeball" id="pokeball"></i></button>
 
           </form>
       )

@@ -57,13 +57,14 @@ export default class Home extends Component {
               {[...invaders].map((invader, i) => (
                 <div class="col" key={i} id="home">
                   <Link to={{pathname:`/invader/${invader._id}`,
-                  invaderId: invader._id}}>
+                  invaderId: invader._id}} id="link">
                   <img
                     src={invader.photo}
                     alt="invader"
                     width="180px"
                     height="180px"
-                  />  
+                  />
+                  <span id="text">arron:{invader.arrondissement}e</span>  
                   </Link>
                 </div>
               ))}

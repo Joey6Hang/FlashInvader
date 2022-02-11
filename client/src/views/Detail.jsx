@@ -1,7 +1,7 @@
 import React,{Component} from "react";
 import APIHandler from "./../api/APIHandler";
 import { Link, Redirect } from "react-router-dom";
-
+import "./../styles/detail.css"
 
 export default class Details extends Component {
     state = {
@@ -51,28 +51,51 @@ export default class Details extends Component {
 
       render() {
         return (
-          <div>
+          <div className="detailmain">
             
               <>
-                <h1>invader's details</h1>
-                <button onClick={() => this.handleUpdate(this.state._id, "update")} >Update</button>
-                <button onClick={() => this.handleDelete(this.state._id)} >Delete</button>
+              <br/>
+                <h1>invader's details</h1>                
+              <br/>
+                <div class="nes-table-responsive">
+                  <table class="nes-table is-bordered is-dark" id="table">
+                    <thead>
+                      <tr>
+                        <th>id {this.state.idName}</th>
+                        <th>point {this.state.point} pt</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>address {this.state.address}</td>
+                        <td>arrondissement {this.state.arrondissement}e</td>
+                      </tr>
+                      <tr>
+                        <td><img src={this.state.photo} alt={this.state.idName} id="imgdetail" /></td>
+                        <td>Supplementary {this.state.supplementary}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <br/>
+                <button 
+                type="button" class="nes-btn is-warning" id="update"
+                onClick={() => this.handleUpdate(this.state._id, "update")} >
+                <i class="nes-icon trophy is-large"></i>
+                <div className="update">  
+                update
+                </div>
+                </button>
                 
-                <p>
-                  id: {this.state.idName}
-                  <br />
-                  address: {this.state.address}
-                  <br />
-                  photo:<img src={this.state.photo} alt={this.state.idName} className="imgdetail" />
-                  <br />
-                  point: {this.state.point}
-                  <br />
-                  arrondissement: {this.state.arrondissement}
-                  <br />
-                  Supplementary: {this.state.supplementary}
-                </p>
-              </>
-            
+                <button 
+                type="button" class="nes-btn is-error" id="delete"
+                onClick={() => this.handleDelete(this.state._id)} >
+                <i class="nes-icon close is-large"></i>
+                <div>
+                  delete
+                </div>
+                </button>
+               </>
           </div>
         );
       }

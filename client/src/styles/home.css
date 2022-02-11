@@ -1,3 +1,23 @@
 #home {
     margin: 5px;
+
+}
+
+#home :hover {
+    transition: width 0.5s ,height 0.5s, transform 0.5s;
+    transition-timing-function: ease;
+    transform: rotate(2deg);
+    vertical-align: middle;
+    opacity:0.7;
+}
+
+h1{
+    color:rgb(233, 194, 20) ;
+}
+#link {
+    text-decoration: none;
+
+}
+#text {
+    color: black;
 }
