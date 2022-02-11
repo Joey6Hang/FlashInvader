@@ -3,7 +3,7 @@ import APIHandler from "../api/APIHandler";
 import "nes.css/css/nes.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './../styles/InvaderCreat.css';
-
+import service from "../api/service.js"
 
 export default class Create extends Component {
   state = {
@@ -17,24 +17,25 @@ export default class Create extends Component {
  
   handleSubmit = async (e) => {
     e.preventDefault();
-    const fd = new FormData();
-    // create a form data (programatic form, to send the file as binary)
-    fd.append("idName", this.state.idName);
-    fd.append("address", this.state.address);
-    fd.append("supplementary", this.state.supplementary);
-    fd.append("point", this.state.point);
-    fd.append("arrondissement", this.state.arrondissement);
-    fd.append("photo", this.state.photo);
     
-    try {
-     const res = await APIHandler.post("/invaders", this.state);
-     alert("Yeahhh!")
-     this.props.history.push("/")
-      console.log(res.data);
-    } catch (err) {
-      console.error(err.response.data);
-    }
+    service
+      .saveNewInvader(this.state)
+      .then(res => {
+        console.log('added new movie: ', res);
+        alert("Yeahhh!")
+        this.props.history.push("/")      
+      })
+      .catch(err => console.log('Error while adding the new movie: ', err));
   };
+    // try {
+    //  const res = await APIHandler.post("/invaders", this.state);
+    //  alert("Yeahhh!")
+    //  this.props.history.push("/")
+    //   console.log(res.data);
+    // } catch (err) {
+    //   console.error(err.response.data);
+    // }
+  
 
   handleChange = (e) => {
       this.setState({
@@ -43,21 +44,36 @@ export default class Create extends Component {
       console.log(e.target);
   };
 
-    handleImage = e => {
-      this.setState({ photo: e.target.files[0] }, () => {
-        const reader = new FileReader();
-        console.log(e.target);
+    // handleImage = e => {
+    //   this.setState({ photo: e.target.files[0] }, () => {
+    //     const reader = new FileReader();
+    //     console.log(e.target);
       
-        reader.onloadend = () => {
-          const baseString = reader.result;
-          console.log(baseString)
-          this.setState({ photo : baseString })
-        }
+    //     reader.onloadend = () => {
+    //       const baseString = reader.result;
+    //       console.log(baseString)
+    //       this.setState({ photo : baseString })
+    //     }
       
-        reader.readAsDataURL(this.state.photo);
+    //     reader.readAsDataURL(this.state.photo);
 
-    });
-    }
+    // });
+    // }
+
+    handleFileUpload = e => {
+       console.log("The file to be uploaded is: ", e.target.files[0]);
+      const uploadData = new FormData();
+      uploadData.append('photo', e.target.files[0]);
+      service
+        .handleUpload(uploadData)
+        .then(response => {
+           console.log("response is: ", response);
+          // after the console.log we can see that response carries 'secure_url' which we can use to update the state
+          this.setState({ photo: response.secure_url });
+        })
+        .catch(err => console.log('Error while uploading the file: ', err));
+      };
+
   render() {
       return (
         <form className="main">
@@ -117,12 +133,16 @@ export default class Create extends Component {
                      onChange={this.handleChange} value={this.state.supplementary}></textarea>
 
                     <label class="nes-btn">
-                    <span>your file</span>
-                        <input type="file" accept="image/*" onChange={this.handleImage} name="photo" ></input>
-                        {/* <img id="blah" src={URL.createObjectURL(this.setState.photo)} alt="img" /> */}
+                    <span>Choose File</span>
+                        <input type="file" accept="image/*" onChange={this.handleFileUpload} name="photo" >
+                        </input>
                       </label>
 
-                      <button type="button" id="submit" class="nes-btn is-success" onClick={this.handleSubmit}><i class="nes-pokeball" id="pokeball"></i></button>
+                      <button type="button" id="submit" class="nes-btn is-success" onClick={this.handleSubmit}>
+                      <i class="nes-pokeball" id="pokeball"></i>
+                      </button>
+                      <br/>
+                        <img src={this.state.photo} id="photo"/>
 
           </form>
       )

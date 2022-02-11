@@ -64,7 +64,7 @@ export default class Home extends Component {
                     width="180px"
                     height="180px"
                   />
-                  <span id="text">arron:{invader.arrondissement}e</span>  
+                  <span id="text">Paris{invader.arrondissement}e</span>  
                   </Link>
                 </div>
               ))}
