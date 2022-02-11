@@ -20,7 +20,7 @@ export default class Details extends Component {
           {
             idName: data.idName,
             address: data.address,
-            supplementary: data.supplementarys,
+            supplementary: data.supplementary,
             point: data.point,
             arrondissement: data.arrondissement,
             photo: data.photo,
@@ -61,18 +61,18 @@ export default class Details extends Component {
                   <table class="nes-table is-bordered is-dark" id="table">
                     <thead>
                       <tr>
-                        <th>id {this.state.idName}</th>
-                        <th>point {this.state.point} pt</th>
+                        <th> {this.state.idName}</th>
+                        <th> {this.state.point} pt</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td>address {this.state.address}</td>
-                        <td>arrondissement {this.state.arrondissement}e</td>
+                        <td> {this.state.address}</td>
+                        <td> {this.state.arrondissement}e</td>
                       </tr>
                       <tr>
                         <td><img src={this.state.photo} alt={this.state.idName} id="imgdetail" /></td>
-                        <td>Supplementary {this.state.supplementary}</td>
+                        <td> {this.state.supplementary}</td>
                       </tr>
                     </tbody>
                   </table>

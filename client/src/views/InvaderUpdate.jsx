@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import APIHandler from "./../api/APIHandler";
+import service from "../api/service.js"
 
 export default class Update extends Component {
   state = {
@@ -9,38 +10,42 @@ export default class Update extends Component {
     point: 0,
     arrondissement: 0,
     photo:null,
+    isLoading:true
   };
 
-//   componentDidMount() {
-//     this.fetchInvader();
-//   }
+  componentDidMount() {
+    this.fetchInvader();
+  }
 
-//   componentDidUpdate() {
-//      console.log(this.props.id , this.state._id);
-//     if (this.props.id !== this.state._id) this.fetchInvader();
-//   }
+  componentDidUpdate() {
+     console.log(this.props.id , this.state._id); // undefinde
+    if (this.props.id !== this.state._id) this.fetchInvader();
+  }
 
-//   fetchInvader = () => {
-//     APIHandler.get("/invader/" + this.props.id).then((res) => {
-//       const { idName, address, supplementary, point, arrondissement, photo } = res.data;
-//       this.setState({
-//         idName,
-//         address,
-//         supplementary,
-//         point,
-//         arrondissement,
-//         photo,
-//         isLoading: false,
-//       });
-//     });
-//   };
+  fetchInvader = () => {
+    APIHandler.get(`/invader/${this.props.match.params.id}`).then((res) => {
+      const { idName, address, supplementary, point, arrondissement, photo } = res.data;
+      this.setState({
+        idName,
+        address,
+        supplementary,
+        point,
+        arrondissement,
+        photo,
+        isLoading: false,
+      });
+    });
+  };
 
   handleUpdate = async (e) => {
     e.preventDefault();
     try {
       const res = await APIHandler.patch(
-      this.props.location.pathname, this.state
+      `/update/${this.props.match.params.id}`, 
+      this.state
       );
+      alert("Updated!")
+      this.props.history.push("/")  
       this.setState(...res)
     } catch (err) {
       console.error(err);
@@ -54,21 +59,19 @@ export default class Update extends Component {
     console.log(this.props);
   };
 
-//   handleImage = e => {
-//     this.setState({ photo: e.target.files[0] }, () => {
-//       const reader = new FileReader();
-//       console.log(e.target);
-    
-//       reader.onloadend = () => {
-//         const baseString = reader.result;
-//         console.log(baseString)
-//         this.setState({ photo : baseString })
-//       }
-    
-//       reader.readAsDataURL(this.state.photo);
-
-//   });
-//   }
+  handleFileUpload = e => {
+    console.log("The file to be uploaded is: ", e.target.files[0]);
+   const uploadData = new FormData();
+   uploadData.append('photo', e.target.files[0]);
+   service
+     .handleUpload(uploadData)
+     .then(response => {
+        console.log("response is: ", response);
+       // after the console.log we can see that response carries 'secure_url' which we can use to update the state
+       this.setState({ photo: response.secure_url });
+     })
+     .catch(err => console.log('Error while uploading the file: ', err));
+   };
 
   render() {
     return this.state.isLoading ? (
@@ -132,12 +135,14 @@ export default class Update extends Component {
                      onChange={this.handleChange} value={this.state.supplementary}></textarea>
 
                     <label class="nes-btn">
-                        <span>Select your file</span>
-                        <input type="file" accept="image/*" onChange={this.handleImage} value={this.state.photo} name="photo" ></input>
-                        {/* <img id="blah" src={URL.createObjectURL(this.setState.photo)} alt="img" /> */}
+                        <span>Choose File</span>
+                        <input type="file" accept="image/*" onChange={this.handleFileUpload} name="photo" >
+                        </input>
                       </label>
 
                       <button type="button" class="nes-btn is-success" onClick={this.handleUpdate}>Update</button>
+                    <br/>
+                    <img src={this.state.photo} id="photo"/>
 
           </form>
           </form>

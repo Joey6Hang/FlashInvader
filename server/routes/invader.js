@@ -6,12 +6,6 @@ const fileUploader = require('./../configs/cloudinary');
 
 // CREATE
 router.post("/invaders", (req, res, next) => {
-  // try {
-  //   const newInvader = await InvaderModel.create({ ...req.body, image: req.file.path });
-  //   res.status(201).json(newInvader);
-  // } catch (err) {
-  //   next(err);
-  // }
   InvaderModel.create(req.body)
   .then(invaders => {
      console.log('Created new movie: ', invaders);

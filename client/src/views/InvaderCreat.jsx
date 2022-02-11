@@ -22,7 +22,7 @@ export default class Create extends Component {
       .saveNewInvader(this.state)
       .then(res => {
         console.log('added new movie: ', res);
-        alert("Yeahhh!")
+        alert("Submitted successfully!")
         this.props.history.push("/")      
       })
       .catch(err => console.log('Error while adding the new movie: ', err));
