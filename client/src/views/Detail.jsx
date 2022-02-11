@@ -29,10 +29,15 @@ export default class Details extends Component {
       })
       .catch((error) => console.error(error.response.data));      
     }
-      handleUpdate = async (e) => {
-        
-      }
 
+    handleUpdate = async (e) => {
+      try {
+        await APIHandler.get(`/invader/${this.props.match.params.id}`);
+        this.props.history.push(`/update/${this.props.match.params.id}`)
+      }catch (err) {
+        console.log(err);
+      }
+    }
       handleDelete = async (e) => {
         try {
           await APIHandler.delete(`/invader/${this.props.match.params.id}`);
@@ -50,7 +55,7 @@ export default class Details extends Component {
             
               <>
                 <h1>invader's details</h1>
-                {/* <button onClick={() => this.props.handler(this.state._id, "update")} >Update</button> */}
+                <button onClick={() => this.handleUpdate(this.state._id, "update")} >Update</button>
                 <button onClick={() => this.handleDelete(this.state._id)} >Delete</button>
                 
                 <p>

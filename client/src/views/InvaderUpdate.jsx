@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import APIHandler from "./../api/APIHandler";
 
-export default class FormUpdate extends Component {
+export default class Update extends Component {
   state = {
     idName: '',
     address: '',
@@ -9,43 +9,37 @@ export default class FormUpdate extends Component {
     point: 0,
     arrondissement: 0,
     photo:null,
-    isLoading:true,
   };
 
-  componentDidMount() {
-    this.fetchInvader();
-  }
+//   componentDidMount() {
+//     this.fetchInvader();
+//   }
 
-  componentDidUpdate() {
-    // console.log(this.props.id !== this.state._id);
-    if (this.props.id !== this.state._id) this.fetchInvader();
-  }
+//   componentDidUpdate() {
+//      console.log(this.props.id , this.state._id);
+//     if (this.props.id !== this.state._id) this.fetchInvader();
+//   }
 
-  fetchInvader = () => {
-    APIHandler.get("/invader/" + this.props.id).then((res) => {
-      const { idName,
-        address,
-        supplementary,
-        point,
-        arrondissement,
-        photo } = res.data;
-      this.setState({
-        idName,
-        address,
-        supplementary,
-        point,
-        arrondissement,
-        photo,
-        isLoading: false,
-      });
-    });
-  };
+//   fetchInvader = () => {
+//     APIHandler.get("/invader/" + this.props.id).then((res) => {
+//       const { idName, address, supplementary, point, arrondissement, photo } = res.data;
+//       this.setState({
+//         idName,
+//         address,
+//         supplementary,
+//         point,
+//         arrondissement,
+//         photo,
+//         isLoading: false,
+//       });
+//     });
+//   };
 
-  handleSubmit = async (e) => {
+  handleUpdate = async (e) => {
     e.preventDefault();
     try {
       const res = await APIHandler.patch(
-        "/invader/" + this.props.id, this.state
+      this.props.location.pathname, this.state
       );
       this.setState(...res)
     } catch (err) {
@@ -55,9 +49,26 @@ export default class FormUpdate extends Component {
 
   handleChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value,
+        [e.target.name]: e.target.value,
     });
+    console.log(this.props);
   };
+
+//   handleImage = e => {
+//     this.setState({ photo: e.target.files[0] }, () => {
+//       const reader = new FileReader();
+//       console.log(e.target);
+    
+//       reader.onloadend = () => {
+//         const baseString = reader.result;
+//         console.log(baseString)
+//         this.setState({ photo : baseString })
+//       }
+    
+//       reader.readAsDataURL(this.state.photo);
+
+//   });
+//   }
 
   render() {
     return this.state.isLoading ? (
@@ -126,7 +137,7 @@ export default class FormUpdate extends Component {
                         {/* <img id="blah" src={URL.createObjectURL(this.setState.photo)} alt="img" /> */}
                       </label>
 
-                      <button type="button" class="nes-btn is-success" onClick={this.handleSubmit}>OK</button>
+                      <button type="button" class="nes-btn is-success" onClick={this.handleUpdate}>Update</button>
 
           </form>
           </form>

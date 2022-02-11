@@ -33,7 +33,7 @@ router.get("/invader/:id", async (req, res, next) => {
 });
 
 // UPDATE
-router.patch("/invader/:id", async (req, res, next) => {
+router.patch("/update/:id", async (req, res, next) => {
   try {
     const updatedInvader = await InvaderModel.findByIdAndUpdate(
       req.params.id,
