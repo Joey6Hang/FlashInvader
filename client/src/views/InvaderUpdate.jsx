@@ -45,7 +45,7 @@ export default class Update extends Component {
       this.state
       );
       alert("Updated!")
-      this.props.history.push("/")  
+      this.props.history.push(`/invader/${this.props.match.params.id}`)  
       this.setState(...res)
     } catch (err) {
       console.error(err);
@@ -82,18 +82,18 @@ export default class Update extends Component {
         <form className="main">
               <div class="nes-field">
                 <label for="name_field">idName</label>
-                <input name = 'idName' type="text" id="name_field" class="nes-input" onChange={this.handleChange} value={this.state.name}></input>
+                <input name = 'idName' type="text" id="name_field" class="nes-input" onChange={this.handleChange} value={this.state.idName}></input>
               </div>
 
               <div class="nes-field">
                 <label for="name_field">Address</label>
-                <input name = 'address' type="text" id="name_field" class="nes-input" onChange={this.handleChange} value={this.state.name}></input>
+                <input name = 'address' type="text" id="name_field" class="nes-input" onChange={this.handleChange} value={this.state.address}></input>
               </div>
 
              
                 <label for="warning_select">nes-select.is-warning</label>
                   <div class="nes-select is-warning">
-                    <select name = 'point' required id="warning_select" onChange={this.handleChange} value={this.state.name}>
+                    <select name = 'point' required id="warning_select" onChange={this.handleChange} value={this.state.point}>
                       <option value="" disabled selected hidden>point...</option>
                       <option value="10">10pt</option>
                       <option value="20">20pt</option>
@@ -101,13 +101,15 @@ export default class Update extends Component {
                       <option value="40">40pt</option>
                       <option value="50">50pt</option>
                       <option value="100">100pt</option>
+                      <option value="???">Unknow</option>
                     </select>
                   </div>
                   <label for="success_select">nes-select.is-success</label>
                     <div class="nes-select is-success">
-                      <select name = 'arrondissement' required id="success_select" onChange={this.handleChange} value={this.state.name}>
+                      <select name = 'arrondissement' required id="success_select" 
+                      onChange={this.handleChange} value={this.state.arrondissement}>
                         <option value="" disabled selected hidden>Arrondissement...</option>
-                        <option value="0">1e</option>
+                        <option value="1">1e</option>
                         <option value="2">2e</option>
                         <option value="3">3e</option>
                         <option value="4">4e</option>

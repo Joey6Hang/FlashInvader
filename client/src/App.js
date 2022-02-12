@@ -10,6 +10,7 @@ import Signup from './views/Signup';
 import Details from './views/Detail';
 import Update from './views/InvaderUpdate';
 import Dashboard from "./views/Dashboard";
+import About from "./views/About";
 import { ProtectedRoute } from "./auth/ProtectedRoute";
 import UserContext from "./auth/UserContext";
 import { useAuth } from "./auth/useAuth";
@@ -40,6 +41,7 @@ export default function App() {
           <ProtectedRoute path="/update/:id" component={Update} />
           <ProtectedRoute path="/delete/:id"/>
           <Route path="/invader/:id" component={Details} />
+          <Route path="/about" component={About} />
          </Switch>
          </BrowserRouter>
        </main>

@@ -23,6 +23,12 @@ export default function Navi() {
           </a>
         </li>
 
+        <li class="nav-item">
+              <a class="nav-link" href="/about" id="create">
+                About
+              </a>
+        </li>
+
         {isLoggedIn && (
           <>
             <li class="nav-item">
@@ -63,6 +69,7 @@ export default function Navi() {
             </li>
           </>
         )}
+       
       </ul>
     </div>
   );
