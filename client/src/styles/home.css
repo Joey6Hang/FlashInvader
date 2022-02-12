@@ -1,6 +1,5 @@
 #home {
     margin: 5px;
-
 }
 
 #home :hover {
@@ -20,4 +19,8 @@ h1{
 }
 #text {
     color: black;
+}
+
+.invader-list-wrap {
+    background-color: black;
 }

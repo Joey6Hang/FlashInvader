@@ -43,6 +43,7 @@ app.use(
   })
   );
    app.use(passport.initialize())
+   app.use(passport.session());
 
    app.get("/", (req, res) => res.send("server is running"));
 
@@ -55,20 +56,20 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
-if (_DEVMODE === true) {
-  app.use(function devMode(req, res, next) {
-    req.user = {
-      _id: "5de9c376fa023e21a766a606",
-      username: "guillaume",
-      email: "gui@foo.bar",
-      avatar:
-        "https://res.cloudinary.com/gdaconcept/image/upload/v1575298339/user-pictures/jadlcjjnspfhknucjfkd.png",
-      role: "admin",
-    };
+// if (_DEVMODE === true) {
+//   app.use(function devMode(req, res, next) {
+//     req.user = {
+//       _id: "5de9c376fa023e21a766a606",
+//       username: "guillaume",
+//       email: "gui@foo.bar",
+//       avatar:
+//         "https://res.cloudinary.com/gdaconcept/image/upload/v1575298339/user-pictures/jadlcjjnspfhknucjfkd.png",
+//       role: "admin",
+//     };
 
-    next();
-  });
-}
+//     next();
+//   });
+// }
 
 // error handler
 app.use(function (err, req, res, next) {

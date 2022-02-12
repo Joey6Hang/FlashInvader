@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 // custom tools
 import UserContext from "../auth/UserContext";
 import APIHandler from "../api/APIHandler";
+import "nes.css/css/nes.min.css";
 
 export default function Signin(props) {
-  const [email, setEmail] = useState("admin@foobarbaz.io");
-  const [password, setPassword] = useState("12345");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { setCurrentUser, currentUser } = useContext(UserContext);
 
   useEffect(() => {
@@ -27,28 +28,35 @@ export default function Signin(props) {
 
   return (
     <form className="form" onSubmit={handleSubmit}>
+    <br/>
       <h1 className="title">Signin</h1>
-      <label className="label" htmlFor="email">
-        email
-      </label>
-      <input
-        className="input"
-        id="email"
+    <br/>
+
+      <div class="nes-field is-inline">
+        <label for="name_field">Email</label>
+        <input className="input"
         type="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-      />
-      <label className="label" htmlFor="password">
-        password
-      </label>
-      <input
-        className="input"
-        id="password"
+        class="nes-input"/>
+      </div>
+      <br/>
+
+      <div class="nes-field is-inline">
+      <label for="error_field">password</label>
+      <input className="input"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-      />
-      <button className="btn">ok</button>
+         id="error_field" 
+         class="nes-input is-error" 
+         placeholder="123?"/>
+      </div>
+      <br/>
+
+      <button type="submit" class="nes-btn is-success">Signin</button>
+      <br/>
+
       <p className="parag">
         No account yet ? please{" "}
         <Link to="/signup" className="link">

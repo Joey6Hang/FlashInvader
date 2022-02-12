@@ -17,21 +17,21 @@ passport.deserializeUser((id, done) => {
   userModel
     .findById(id)
     .then(user => {
-      // console.log("ok : passport.deserializeUser, user found in db ", user);
+       console.log("ok : passport.deserializeUser, user found in db ", user);
       done(null, user);
     })
     .catch(err => {
-      // console.log("error: passport.deserializeUser, user NOT fetched from db ");
+       console.log("error: passport.deserializeUser, user NOT fetched from db ");
       done(err, null);
     });
 });
 
-// this function setup a local strategy and provides logic for login action
+// 这个函数设置了一个本地策略并提供了登录动作的逻辑。
 passport.use(
   new LocalStrategy(
     { usernameField: "email" }, // change default username credential to email
     function(email, passwd, next) {
-      // console.log("local strategy", email, passwd);
+       console.log("local strategy", email, passwd);
       userModel
         .findOne({ email: email })
         .then(user => {

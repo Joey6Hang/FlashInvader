@@ -1,6 +1,3 @@
-/*------------------------------------------
-// AUTH ROUTING
-------------------------------------------*/
 
 const express = require("express");
 const router = new express.Router();
@@ -19,18 +16,18 @@ const minPasswordLength = 4;
 // more on HTTP status
 // https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 
-router.post("/signup", /*uploader.single("avatar"),*/ (req, res, next) => {
-  // console.log("file ?", req.file);
-  // console.log(req.body);
+router.post("/signup", uploader.single("avatar"), (req, res, next) => {
+   console.log("file ?", req.file);
+   console.log(req.body);
   let errorMsg = "";
   const { username, password, email } = req.body;
-  // @todo : best if email validation here or check with a regex in the User model
+  // @todo : 最好在这里进行电子邮件验证，或者在用户模型中用一个重词进行检查。
   if (!password || !email) errorMsg += "Provide email and password.\n";
 
   if (password.length < minPasswordLength)
     errorMsg += `Please make your password at least ${minPasswordLength} characters.`;
 
-  if (errorMsg) return res.status(403).json(errorMsg); // 403	Forbidden
+  if (errorMsg) return res.status(403).json(errorMsg); // 403	禁止的
 
   const salt = bcrypt.genSaltSync(10);
   // more on encryption : https://en.wikipedia.org/wiki/Salt_(cryptography)
@@ -58,7 +55,7 @@ router.post("/signup", /*uploader.single("avatar"),*/ (req, res, next) => {
 
 router.post("/signin", (req, res, next) => {
   passport.authenticate("local", (err, user, failureDetails) => {
-    if (err || !user) return res.status(403).json({ failureDetails }); // 403 : Forbidden
+    if (err || !user) return res.status(403).json({ failureDetails }); // 403 : Forbidden  failureDetails：失败的细节
 
     /**
      * req.Login is a passport method
@@ -94,13 +91,13 @@ router.post("/signin", (req, res, next) => {
 
 router.post("/signout", (req, res, next) => {
   req.logout(); // utility function provided by passport
+  alert("Successfully logged out")
   res.status(200).json({ message: "Successfully logged out" });
 });
 
-router.use("/is-loggedin", (req, res, next) => {
+router.get("/is-loggedin", (req, res, next) => {
   if (req.isAuthenticated()) {
-    // method provided by passport
-    const { _id, username, favorites, email, avatar, role } = req.user;
+    const { _id, username, email, avatar, role } = req.user;
     return res.status(200).json({
       currentUser: {
         _id,

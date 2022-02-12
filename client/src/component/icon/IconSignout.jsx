@@ -11,7 +11,7 @@ export default withRouter(function IconSignout(props) {
 
   const handleSignout = () =>
     APIHandler.post("/signout").finally(() => {
-      props.history.push("/signin")
+      props.history.push("/")
       setCurrentUser(null);
     });
 
@@ -20,7 +20,7 @@ export default withRouter(function IconSignout(props) {
       onClick={handleSignout}
       className="link icon-signout is-clickable"
       icon={faSignOutAlt}
-      size="xs"
+      size="s"
       title="signout"
     />
   );

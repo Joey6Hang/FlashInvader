@@ -62,8 +62,8 @@ export default class Home extends Component {
                   <img
                     src={invader.photo}
                     alt="invader"
-                    width="180px"
-                    height="180px"
+                    width="120px"
+                    height="120px"
                   />
                   <span id="text">Paris{invader.arrondissement}e</span>  
                   </Link>
