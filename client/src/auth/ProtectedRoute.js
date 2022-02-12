@@ -15,5 +15,6 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
   ) : (
     // if not logged in redirect to signin
     <Redirect to="/signin" />
+    
   );
 };

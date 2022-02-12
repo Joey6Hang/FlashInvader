@@ -4,6 +4,7 @@ import "nes.css/css/nes.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./../styles/InvaderCreat.css";
 import service from "../api/service.js";
+import { useAuth } from "../auth/useAuth";
 
 export default class Create extends Component {
   state = {
@@ -181,10 +182,10 @@ export default class Create extends Component {
           class="nes-btn is-success"
           onClick={this.handleSubmit}
         >
-          <i class="nes-pokeball" id="pokeball"></i>
+          <i class="nes-pokeball" id="pokeball" title="submit"></i>
         </button>
         <br />
-        <img src={this.state.photo} id="photo" />
+        <img src={this.state.photo} id="photo"/>
       </form>
     );
   }

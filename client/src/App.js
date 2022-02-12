@@ -19,9 +19,6 @@ export default function App() {
   
   const { isLoading } = useAuth(); // custom hook, cooked with love by frankles + me
   const [currentUser, setCurrentUser] = useState({});
-
-  // check src/auth/UserContext =>
-  // MANDATORY TO GET/SET loggedin currentUser against server response
   const UserContextValue = {
     currentUser,
     setCurrentUser,
@@ -39,9 +36,10 @@ export default function App() {
           <Route path="/signin" component={Signin} />
           <Route path="/signup" component={Signup} /> 
           <ProtectedRoute path="/dashboard" component={Dashboard} />
-          <Route path="/create" component={Create} />
+          <ProtectedRoute path="/create" component={Create} />
+          <ProtectedRoute path="/update/:id" component={Update} />
+          <ProtectedRoute path="/delete/:id"/>
           <Route path="/invader/:id" component={Details} />
-          <Route path="/update/:id" component={Update} />
          </Switch>
          </BrowserRouter>
        </main>

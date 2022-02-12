@@ -15,7 +15,7 @@ const userSchema = new Schema({
   },
   avatar: {
     type: String,
-    default: "https://cdn.onlinewebfonts.com/svg/img_258083.png"
+    default: "/images/Avatar.jpeg"
   } 
 });
 

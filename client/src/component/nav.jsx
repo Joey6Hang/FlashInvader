@@ -30,9 +30,9 @@ export default function Navi() {
                 class="nav-link active"
                 id="create"
                 aria-current="page"
-                href="/dashboard"
+                href="/create"
               >
-            <IconAvatarAdmin avatar = {currentUser.avatar} />
+                create
               </a>
             </li>
 
@@ -41,9 +41,9 @@ export default function Navi() {
                 class="nav-link active"
                 id="create"
                 aria-current="page"
-                href="/create"
+                href="/dashboard"
               >
-                create
+            <IconAvatarAdmin avatar = {currentUser.avatar} />
               </a>
             </li>
           </>

@@ -41,7 +41,7 @@ export default class Home extends Component {
     return (
       <div className="invader-list-wrap">
         <img src="/images/application-flash-invaders.jpeg" alt="img" width="100%" height= "280"></img>
-        <img src="/images/pac-man1.gif" width="100%" height="130"></img>
+        <img src="/images/pac-man1.gif" width="100%" height="130" alt="pacman1"></img>
         <h1>Invaders</h1>
         {!this.state.invaders.length? (
           <div className="jiazai">
@@ -62,8 +62,8 @@ export default class Home extends Component {
                   <img
                     src={invader.photo}
                     alt="invader"
-                    width="120px"
-                    height="120px"
+                    width="190px"
+                    height="190px"
                   />
                   <span id="text">Paris{invader.arrondissement}e</span>  
                   </Link>
@@ -72,7 +72,7 @@ export default class Home extends Component {
           </div>
           </div>
     )}
-    <img src="/images/pac-man2.gif" width="100%" height="120"></img>
+    <img src="/images/pac-man2.gif" width="100%" height="120" alt="pacman2"></img>
       </div>
       );
     }

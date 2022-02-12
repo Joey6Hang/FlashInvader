@@ -26,7 +26,6 @@ router.post("/signup", uploader.single("avatar"), (req, res, next) => {
 
   if (password.length < minPasswordLength)
     errorMsg += `Please make your password at least ${minPasswordLength} characters.`;
-
   if (errorMsg) return res.status(403).json(errorMsg); // 403	禁止的
 
   const salt = bcrypt.genSaltSync(10);

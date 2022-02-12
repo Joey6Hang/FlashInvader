@@ -32,7 +32,7 @@ export default function Signin(props) {
       <h1 className="title">Signin</h1>
     <br/>
 
-      <div class="nes-field is-inline">
+      <div class="nes-field ">
         <label for="name_field">Email</label>
         <input className="input"
         type="email"
@@ -42,7 +42,7 @@ export default function Signin(props) {
       </div>
       <br/>
 
-      <div class="nes-field is-inline">
+      <div class="nes-field ">
       <label for="error_field">password</label>
       <input className="input"
         type="password"

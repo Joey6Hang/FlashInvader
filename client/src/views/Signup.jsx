@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// custom tools
 import APIHandler from "../api/APIHandler";
 import IconAvatarAdmin from "../component/icon/IconAvatarAdmin";
+//import authService from "../auth/service"
 // styles 
-import "./../styles/form.css";
 import "./../styles/icon-avatar.css";
+import "./../styles/icon-avatar.css";
+
 
 export default class Signup extends Component {
   state = {
     avatar: "",
-    tmpAvatar: "",
-    username: "admin",
-    email: "admin@foobarbaz.io",
-    password: "12345"
+    username: "",
+    email: "",
+    password: ""
   };
 
   handleSubmit = async e => {
@@ -28,11 +28,24 @@ export default class Signup extends Component {
 
     try {
       await APIHandler.post("/signup", fd);
+      console.log("fd"+fd,"this.state" + this.state);
       this.props.history.push("/signin");
     } catch (err) {
       console.error(err);
     }
   };
+    //   const {username, password, avatar, mail} = this.state;
+    //   authService.signup(username, password, avatar, mail)
+    //   .then(createdUser => {
+    //       this.setState({
+    //           mail:"",
+    //           username: "",
+    //           password: "",
+    //           avatar: "",
+    //       });
+    //   })
+    //   .catch(error => console.log(error))
+    // }
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -45,58 +58,72 @@ export default class Signup extends Component {
       reader.onloadend = () => {
         // when the fileREader ends  ...
         const baseString = reader.result; // get the image as a base64 encoded string
-        console.log(baseString)
-        this.setState({ tmpAvatar: baseString }); // set the tmp avatar as an image source before upload
+        // console.log(baseString)
+        this.setState({ avatar: baseString }); // set the tmp avatar as an image source before upload
+        console.log(baseString);
       };
       reader.readAsDataURL(this.state.avatar); // read the file from the local disk
     });
   };
+  
 
   render() {
-    const { email, password, username, tmpAvatar } = this.state;
+    const { email, password, username, avatar } = this.state;
     return (
       <React.Fragment>
         <form
-          className="form"
-          onSubmit={this.handleSubmit}
-          onChange={this.handleChange}
+          className="form" onSubmit={this.handleSubmit}
         >
+        <br/>
           <h1 className="title">Signup</h1>
-          <label className="label" htmlFor="email">
-            email
+        <br/>
+
+        <label className="label" id="avatar" htmlFor="avatar">
+          <IconAvatarAdmin avatar={avatar} clbk={this.handleImage} />
           </label>
-          <input
-            className="input"
-            id="email"
-            type="email"
-            name="email"
-            defaultValue={email}
-          />
-          <label className="label" htmlFor="username">
-            username
-          </label>
-          <input
-            className="input"
-            id="username"
-            type="text"
+          <br/>
+
+        <div class="nes-field">
+        <label for="name_field">Email</label>
+        <input className="input"
+        type="email"
+        name="email"
+        class="nes-input"
+        defaultValue={email}
+        onChange={this.handleChange}
+        />
+        </div>
+        <br/>
+
+          <div class="nes-field">
+          <label for="warning_field">Username</label>
+          <input 
+            type="text" 
+            id="warning_field" 
             name="username"
-            defaultValue={username}
+             class="nes-input is-warning" 
+             defaultValue={username}
+             onChange={this.handleChange}
           />
-          <label className="label" htmlFor="avatar">
-            avatar
-          </label>
-          <IconAvatarAdmin avatar={tmpAvatar} clbk={this.handleImage} />
-          <label className="label" htmlFor="password">
-            password
-          </label>
-          <input
-            className="input"
-            id="password"
+        </div>
+        <br/>
+
+          <div class="nes-field">
+          <label for="error_field">password</label>
+          <input className="input"
             type="password"
+            id="error_field" 
+            class="nes-input is-error" 
             name="password"
             defaultValue={password}
-          />
-          <button className="btn">ok</button>
+            onChange={this.handleChange}
+            />
+          </div>
+          <br/>
+
+        <button type="submit" class="nes-btn is-success">Signup</button>
+        <br/>
+
         </form>
         <p className="parag">
           Already a member ? please{" "}
