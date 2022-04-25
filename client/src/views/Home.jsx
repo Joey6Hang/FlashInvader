@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./../styles/home.css"
-
+import Search from "../component/Search"
 
 export default class Home extends Component {
   state = {
@@ -31,6 +31,7 @@ export default class Home extends Component {
     const { invaders } = this.state;
     return (
       <div className="invader-list-wrap">
+        <Search />
         <img src="/images/application-flash-invaders.jpeg" alt="img" width="100%" height= "280"></img>
         <img src="/images/pac-man1.gif" width="100%" height="130" alt="pacman1"></img>
         <h1>Invaders</h1>
