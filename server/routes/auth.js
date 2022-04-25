@@ -70,7 +70,7 @@ router.post("/signin", (req, res, next) => {
       // You may find usefull to send some other infos
       // dont send sensitive informations back to the client
       // let's choose the exposed user below
-      const { _id, username, email, favorites, avatar, role } = user;
+      const { _id, username, email, avatar, role } = user;
       // and only expose non-sensitive inofrmations to the client's state
       next(
         res.status(200).json({
@@ -80,7 +80,6 @@ router.post("/signin", (req, res, next) => {
             email,
             avatar,
             role,
-            favorites,
           },
         })
       );
@@ -90,7 +89,6 @@ router.post("/signin", (req, res, next) => {
 
 router.post("/signout", (req, res, next) => {
   req.logout(); // utility function provided by passport
-  alert("Successfully logged out")
   res.status(200).json({ message: "Successfully logged out" });
 });
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import APIHandler from "../api/APIHandler";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Tabs, Tab,Row, Col, Spinner } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./../styles/home.css"
 
@@ -22,15 +22,6 @@ export default class Home extends Component {
         console.error(err.response.data);
       });
   };
-
-  // handleDelete = async (id) => {
-  //   try {
-  //     await APIHandler.delete(`/invaders/${id}`);
-  //     this.fetchInvaders();
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
   componentDidMount() {
     this.fetchInvaders();

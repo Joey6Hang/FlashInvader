@@ -9,9 +9,10 @@ export default withRouter(function IconSignout(props) {
   const userContext = useContext(UserContext);
   const { setCurrentUser } = userContext;
 
-  const handleSignout = () =>
-    APIHandler.post("/signout").finally(() => {
-      props.history.push("/")
+  const handleSignout = (e) =>
+  APIHandler.post("/signout").finally(() => {
+    props.history.push("/")
+    e.preventdefault()
       setCurrentUser(null);
     });
 
