@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d4456382.css",
+    "main.js": "/static/js/main.06e267e3.js",
+    "static/media/invader_white.webp": "/static/media/invader_white.03406c5eaecfb35e7c5a.webp",
+    "index.html": "/index.html",
+    "main.d4456382.css.map": "/static/css/main.d4456382.css.map",
+    "main.06e267e3.js.map": "/static/js/main.06e267e3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d4456382.css",
+    "static/js/main.06e267e3.js"
+  ]
+}
